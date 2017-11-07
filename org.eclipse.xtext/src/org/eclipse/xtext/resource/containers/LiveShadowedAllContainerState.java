@@ -19,10 +19,10 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
- * This class ensures that every IResourceDescription from a local IResourceDescrions that is not known to the global
+ * This class ensures that every IResourceDescription from a local IResourceDescrptions that is not known to the global
  * IAllContainerState gets a proper container.
  * 
- * This is usually necessary when an IResourceDescrion has no (not yet a) file in the file system.
+ * This is usually necessary when an IResourceDescrption has no (not yet a) file in the file system.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.6
@@ -31,7 +31,7 @@ public class LiveShadowedAllContainerState implements IAllContainersState {
 
 	public static class Provider {
 		// we're not implementing IAllContainerState.Provider here because its get() expects a global instance of IResourceDescrions. 
-		// Here, we expect one that only holds an IResourceDescrion for every resource from a ResourceSet.  
+		// Here, we expect one that only holds an IResourceDescripton for every resource from a ResourceSet.  
 
 		@Inject
 		private com.google.inject.Provider<LiveShadowedAllContainerState> provider;
