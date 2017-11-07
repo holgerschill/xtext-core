@@ -8,7 +8,13 @@
 package org.eclipse.xtext.ide
 
 import com.google.inject.Binder
+import com.google.inject.name.Names
 import java.util.concurrent.ExecutorService
+import org.eclipse.xtext.resource.IContainer
+import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager
+import org.eclipse.xtext.resource.impl.LiveShadowedChunkedResourceDescriptions
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.service.AbstractGenericModule
 
 /**
@@ -20,4 +26,13 @@ class DefaultIdeModule extends AbstractGenericModule {
 		binder.bind(ExecutorService).toProvider(ExecutorServiceProvider)
 	}
 	
+	def void configureIResourceDescriptionsLiveScope(Binder binder) {
+		binder.bind(IResourceDescriptions)
+			.annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE))
+			.to(LiveShadowedChunkedResourceDescriptions);
+	}
+	
+	def Class<? extends IContainer.Manager> bindIContainer$Manager() {
+		ProjectDescriptionBasedContainerManager
+	}
 }

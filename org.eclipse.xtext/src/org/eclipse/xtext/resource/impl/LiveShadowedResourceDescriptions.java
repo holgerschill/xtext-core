@@ -28,6 +28,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -43,15 +44,18 @@ import com.google.inject.Inject;
 public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDescriptions {
 	
 	@Inject
-	private ResourceSetBasedResourceDescriptions localDescriptions;
+	protected ResourceSetBasedResourceDescriptions localDescriptions;
 
 	@Inject
-	private IResourceDescriptions globalDescriptions;
+	private Provider<IResourceDescriptions> globalDescriptionsProvider;
 
+	protected IResourceDescriptions globalDescriptions;
+	
 	@Override
 	public void setContext(Notifier ctx) {
 		localDescriptions.setContext(ctx);
 		localDescriptions.setData(null);
+		globalDescriptions = globalDescriptionsProvider.get();
 		if(globalDescriptions instanceof IResourceDescriptions.IContextAware)
 			((IResourceDescriptions.IContextAware) globalDescriptions).setContext(ctx);
 	}
