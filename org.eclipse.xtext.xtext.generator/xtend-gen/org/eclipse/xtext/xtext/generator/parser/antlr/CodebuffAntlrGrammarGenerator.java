@@ -36,7 +36,7 @@ public class CodebuffAntlrGrammarGenerator extends AbstractAntlrGrammarGenerator
   
   @Override
   protected CharSequence compileParserOptions(final Grammar it, final AntlrOptions options) {
-    return "";
+    return "options {contextSuperClass=org.antlr.v4.runtime.RuleContextWithAltNum;}";
   }
   
   @Override

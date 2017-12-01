@@ -22,22 +22,21 @@ class CodebuffAntlrGrammarGenerator extends AbstractAntlrGrammarGenerator {
 	override protected getGrammarNaming() {
 		naming
 	}
-	
+
 	override protected compileParserOptions(Grammar it, AntlrOptions options) {
-		""
+		"options {contextSuperClass=org.antlr.v4.runtime.RuleContextWithAltNum;}"
 	}
 
 	override protected compileParserHeader(Grammar it, AntlrOptions options) '''
 	'''
-	
 
 	override protected compileLexerHeader(Grammar it, AntlrOptions options) '''
 	'''
-	
+
 	protected override String ebnfPredicate(AbstractElement it, AntlrOptions options) ''''''
-	
+
 	protected override String dataTypeEbnfPredicate(AbstractElement it) ''''''
-	
+
 	protected override dispatch compileRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
 		«IF options.isBacktrackLexer»
 			«IF !isSyntheticTerminalRule(it)»
